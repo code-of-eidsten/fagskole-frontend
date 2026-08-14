@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Med viewport</title>
+    <style>
+        img {
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .box {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TEST</h1>
+     <div class="box">
+        <p>Denne siden har viewport meta-tag. Den tilpasser seg til enheten din.</p>
+    </div>
+    <div class="box">
+        <p>Åpne denne i DevTools med mobilemulering for å se forskjellen!</p>
+    </div>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.rd.com%2Fwp-content%2Fuploads%2F2020%2F02%2FGettyImages-1182203515.jpg&f=1&nofb=1&ipt=da8a8669eb0d3f186d17c444d74ac9f29dc0d9b358ddd2e95fd84a6abe06082a"
+        alt="catto">
+</body>
+
+</html>

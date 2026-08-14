@@ -1,0 +1,2 @@
+Uten viewport vil innholdet på siden flyte utover bredden av de smalere skjermene og man må scrolle 
+horisontalt for å kunne se alt innholdet.
