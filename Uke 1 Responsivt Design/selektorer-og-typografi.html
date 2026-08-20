@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typografi, Selektorer og CSS</title>
+    <style>
+        li {
+            border-top: 2px solid #ccc;
+        }
+
+        .listA {
+            color: blue;
+        }
+
+        .listB {
+            color: green;
+        }
+
+        li:nth-child(3) {
+            background-color: pink;
+        }
+
+        li:nth-child(2n) {
+            color: red;
+        }
+
+        li:first-child {
+            border-top: none;
+        }
+
+        @font-face {
+            font-family: 'TestFont';
+            /*a name to be used later*/
+            src: local('playwrite.ttf');
+            /*URL to font*/
+        }
+
+        .largeTxt {
+            font-size: 17vw;
+            font-family: 'TestFont', sans-serif;
+        }
+
+        [data-status] {
+            background-color: #f0f0f0;
+        }
+
+        [data-status="active"] {
+            background-color: green;
+        }
+
+        :not([data-status="inactive"]) {
+            border: 2px solid gray;
+        }
+
+        [data-role^="admin"],
+        [data-role*="user"],
+        [data-role$="guest"] {
+            background-color: lightgray;
+        }
+        [data-role="admin-user"],[data-status="active"] {
+            border: 2px solid red;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <ul>
+        <li data-status="active" data-role="admin-user">Admin User (Active)</li>
+        <li data-status="inactive" data-role="guest">Guest (Inactive)</li>
+        <li data-status="active" data-role="user">Regular User (Active)</li>
+        <li data-status="pending" data-role="admin-guest">Admin Guest (Pending)</li>
+        <li data-status="inactive" data-role="user">Regular User (Inactive)</li>
+    </ul>
+
+    <article class="largeTxt">Hei på deg!</article>
+    <ul class="listA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+    </ul>
+
+    <ul class="listB">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+    </ul>
+</body>
+
+</html>
