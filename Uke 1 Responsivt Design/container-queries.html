@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Queries: ProductList</title>
+    <style>
+        .product-list-container {
+  container-type: inline-size;
+}
+
+/* Kompakt layout – lite plass */
+.product {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-image img {
+   width: 70%;
+  height: auto;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 12px;
+}
+
+.product-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.description {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: #666;
+  display: none; /* Skjult på små containers */
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: bold;
+  color: #e74c3c;
+  font-size: 14px;
+}
+
+button {
+  padding: 6px 12px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Medium layout – 350px+ */
+@container (min-width: 350px) {
+  .product-info h2 {
+    font-size: 18px;
+  }
+
+  .description {
+    display: block; /* Vis beskrivelse */
+    font-size: 13px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+}
+
+/* Horizontal layout – 500px+ */
+@container (min-width: 500px) {
+  .product {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .product-image {
+    width: 150px;
+    flex-shrink: 0;
+  }
+
+  .product-image img {
+    height: 100%;
+  }
+
+  .product-info {
+    padding: 20px;
+    flex: 1;
+  }
+
+  .product-info h2 {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .product-footer {
+    margin-top: 12px;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="product-list-container">
+  <div class="product">
+    <div class="product-image">
+      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mobieg.co.za%2Fwp-content%2Fuploads%2F2020%2F04%2Fproduct-placeholder.jpg&f=1&nofb=1&ipt=9a82dbb57b7b3a6df65858ad7c429bc7f37aa704e84f50e9c4f84a46f4951f11" alt="Produkt" />
+    </div>
+    <div class="product-info">
+      <h2>Produktnavn</h2>
+      <p class="description">Kort beskrivelse av produktet</p>
+      <div class="product-footer">
+        <span class="price">$29.99</span>
+        <button>Kjøp</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>
