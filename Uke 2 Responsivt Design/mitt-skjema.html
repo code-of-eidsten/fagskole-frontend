@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontaktskjema</title>
+</head>
+<body>
+  <h1>Kontaktskjema</h1>
+  <!-- Ditt skjema her -->
+   <form action="#" method="POST" novalidate>
+        <div>
+             <label for="fornavn">
+              Fornavn
+            </label>
+            <input type="text" id="fornavn" name="fornavn"
+                   required aria-required="true" 
+                   aria-describedby="fornavn-hjelp fornavn-feil"
+                   pattern="[A-Za-zæøåÆØÅ\s]{2,}">
+            <span id="fornavn-hjelp">
+              Ditt fulle fornavn
+            </span>
+        </div>
+        <div>
+            <label for="etternavn">
+              Etternavn
+            </label>
+            <input type="text" id="etternavn" name="etternavn"
+                   required aria-required="true" 
+                   aria-describedby="etternavn-hjelp etternavn-feil"
+                   pattern="[A-Za-zæøåÆØÅ\s]{2,}">
+            <span id="etternavn-hjelp">
+              Ditt fulle etternavn
+            </span>
+        </div>
+         <div>
+            <label for="epost">
+              E-post
+            </label>
+            <input type="email" id="epost" name="epost"
+                   required aria-required="true" 
+                   aria-describedby="epost-hjelp epost-feil"
+                   placeholder="navn@eksempel.no"
+                   autocomplete="email"
+                   >
+            <span id="epost-hjelp">
+              Din fulle e-post
+            </span>
+        </div>
+
+        <div>
+            <label for="telefon" class="form-label">
+              Telefonnummer(valgfritt)
+            </label>
+            <input type="tel" id="telefon" name="telefon" class="form-input" 
+                   aria-describedby="telefon-hjelp telefon-feil"
+                   pattern="[0-9\s\+]{8,}"
+                   placeholder="+47 123 45 678"
+                   autocomplete="tel">
+            <span id="telefon-hjelp">
+              Inkluder landkode hvis utenlandsk nummer
+            </span>
+        </div>
+
+         <div>
+          <label for="msg">
+            Kort melding
+          </label>
+          <textarea id="msg" name="msg" class="form-textarea" 
+                    rows="4" maxlength="500"
+                    aria-describedby="msg-hjelp msg-teller"
+                    placeholder="Skriv en melding..."></textarea>
+          <span id="msg-hjelp">
+            Maksimalt <span id="msg-teller">500</span> tegn
+          </span>
+        </div>
+
+        <div>
+            <input type="checkbox" id="nyhetsbrev" name="kommunikasjon[]" value="nyhetsbrev" checked>
+            <label for="nyhetsbrev">Nyhetsbrev</label>
+          </div>
+
+   </form>
+</body>
+</html>
