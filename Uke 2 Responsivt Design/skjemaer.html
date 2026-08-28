@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avansert Skjema Demo - Tilgjengelige og Responsive Skjemaer</title>
+  <style>
+    /* ===== CSS-VARIABLER FOR ENKEL TILPASNING ===== */
+    :root {
+      /* Farger */
+      --color-primary: #0066cc;
+      --color-primary-dark: #0052a3;
+      --color-secondary: #6c757d;
+      --color-success: #28a745;
+      --color-warning: #ffc107;
+      --color-danger: #dc3545;
+      --color-info: #17a2b8;
+      
+      /* Bakgrunner og tekst */
+      --bg-color: #ffffff;
+      --bg-color-secondary: #f8f9fa;
+      --text-color: #212529;
+      --text-color-muted: #6c757d;
+      --border-color: #dee2e6;
+      --border-color-focus: #0066cc;
+      
+      /* Tilstandsstiler */
+      --color-valid: #28a745;
+      --color-invalid: #dc3545;
+      --color-disabled: #6c757d;
+      
+      /* Typografi */
+      --font-size-base: clamp(16px, 2.5vw, 18px);
+      --font-size-small: clamp(14px, 2vw, 16px);
+      --font-size-label: clamp(15px, 2.2vw, 17px);
+      
+      /* Avstander */
+      --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+      --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+      --spacing-md: clamp(1rem, 3vw, 1.5rem);
+      --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+      --spacing-xl: clamp(2rem, 5vw, 3rem);
+      
+      /* Layout */
+      --container-max-width: min(calc(100% - 2rem), 800px);
+      --border-radius: clamp(4px, 1vw, 6px);
+      --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      --box-shadow-focus: 0 0 0 4px rgba(0, 102, 204, 0.15);
+      
+      /* Tilgjengelighet */
+      --focus-color: #0066cc;
+      --focus-width: 3px;
+      --focus-offset: 2px;
+    }
+
+    /* ===== MØRK MODUS ===== */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #1a1a1a;
+        --bg-color-secondary: #2d2d2d;
+        --text-color: #e9ecef;
+        --text-color-muted: #adb5bd;
+        --border-color: #495057;
+        --border-color-focus: #4dabf7;
+        --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* ===== HØYKONTRAST ===== */
+    @media (prefers-contrast: high) {
+      :root {
+        --color-primary: #0000ff;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --border-color: #000000;
+        --focus-color: #ff0000;
+      }
+    }
+
+    /* ===== REDUSERT BEVEGELSE ===== */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== BASISSTILER ===== */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: var(--spacing-md);
+    }
+
+    /* ===== TYPOGRAFI ===== */
+    h1, h2, h3 {
+      margin-top: 0;
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--text-color);
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+    }
+
+    h3 {
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+      color: var(--text-color-muted);
+    }
+
+    p {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    /* ===== SKJEMASTILER ===== */
+    .form-container {
+      background-color: var(--bg-color-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      box-shadow: var(--box-shadow);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-md);
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: 600;
+      color: var(--text-color);
+      font-size: var(--font-size-label);
+    }
+
+    .form-label.required::after {
+      content: " *";
+      color: var(--color-danger);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: var(--spacing-sm);
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-size: var(--font-size-base);
+      font-family: inherit;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      min-height: 44px; /* Touch-friendly */
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--border-color-focus);
+      box-shadow: var(--box-shadow-focus);
+      background-color: var(--bg-color);
+    }
+
+    .form-input:focus-visible {
+      outline: var(--focus-width) solid var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+
+    /* Placeholder-styling */
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--text-color-muted);
+      opacity: 0.7;
+    }
+
+    /* Tekstområde */
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Select-styling */
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right var(--spacing-sm) center;
+      background-repeat: no-repeat;
+      background-size: 16px 12px;
+      padding-right: var(--spacing-lg);
+    }
+
+    /* Checkbox og radio */
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+      cursor: pointer;
+    }
+
+    .form-check input {
+      width: 20px;
+      height: 20px;
+      margin-right: var(--spacing-sm);
+      cursor: pointer;
+      min-width: 20px;
+    }
+
+    .form-check label {
+      margin-bottom: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Range slider */
+    .form-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 3px;
+      outline: none;
+      padding: 0;
+      min-height: auto;
+    }
+
+    .form-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--bg-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-range::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--bg-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hjelpetekst og feilmeldinger */
+    .help-text {
+      display: block;
+      font-size: var(--font-size-small);
+      color: var(--text-color-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    .error-message {
+      display: none;
+      font-size: var(--font-size-small);
+      color: var(--color-danger);
+      margin-top: var(--spacing-xs);
+      font-weight: 500;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Tilstandsstiler */
+    .form-input:valid:not(:placeholder-shown) {
+      border-color: var(--color-valid);
+    }
+
+    .form-input:invalid:not(:placeholder-shown) {
+      border-color: var(--color-invalid);
+    }
+
+    .form-input:disabled {
+      background-color: var(--bg-color-secondary);
+      border-color: var(--border-color);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .form-group.has-error .form-input {
+      border-color: var(--color-danger);
+    }
+
+    .form-group.has-error .form-label {
+      color: var(--color-danger);
+    }
+
+    /* Knapp styling */
+    .btn {
+      display: inline-block;
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid transparent;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      min-height: 44px; /* Touch-friendly */
+    }
+
+    .btn:focus {
+      outline: var(--focus-width) solid var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    /* Fieldset og legend */
+    fieldset {
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    legend {
+      font-weight: 600;
+      color: var(--color-primary);
+      padding: 0 var(--spacing-sm);
+      font-size: var(--font-size-label);
+    }
+
+    /* Form layout */
+    .form-row {
+      display: grid;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Responsiv layout */
+    @media (min-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .form-row .form-group:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    /* Progress indicator */
+    .form-progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-lg);
+      padding: 0;
+      list-style: none;
+    }
+
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      font-size: var(--font-size-small);
+      color: var(--text-color-muted);
+    }
+
+    .progress-step::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 30px;
+      background-color: var(--border-color);
+      border-radius: 50%;
+      margin: 0 auto var(--spacing-xs);
+      line-height: 30px;
+      font-weight: bold;
+    }
+
+    .progress-step.active::before {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .progress-step.completed::before {
+      background-color: var(--color-success);
+      color: white;
+    }
+
+    /* File upload styling */
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .file-upload input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-md);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--border-radius);
+      background-color: var(--bg-color);
+      transition: all 0.3s ease;
+      min-height: 100px;
+    }
+
+    .file-upload:hover .file-upload-label {
+      border-color: var(--border-color-focus);
+      background-color: var(--bg-color-secondary);
+    }
+
+    /* Tema-toggle */
+    .theme-controls {
+      position: fixed;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      display: flex;
+      gap: var(--spacing-sm);
+      z-index: 1000;
+    }
+
+    .theme-toggle {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: var(--font-size-small);
+      transition: background-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--color-primary-dark);
+    }
+
+    /* Responsiv tilpasning */
+    @media (max-width: 768px) {
+      .form-container {
+        padding: var(--spacing-md);
+      }
+      
+      .theme-controls {
+        position: static;
+        margin-bottom: var(--spacing-md);
+        justify-content: center;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Hjelpeklasser */
+    .text-center { text-align: center; }
+    .text-muted { color: var(--text-color-muted); }
+    .mb-0 { margin-bottom: 0; }
+    .mt-0 { margin-top: 0; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Tema-kontroller -->
+  <div class="theme-controls">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Bytt tema">
+      🌓 Tema
+    </button>
+    <button class="theme-toggle" onclick="showInfo()" aria-label="Vis informasjon">
+      ℹ️ Info
+    </button>
+  </div>
+
+  <div class="container">
+    <header class="text-center">
+      <h1>Avansert Skjema Demo</h1>
+      <p class="text-muted">
+        Et komplett eksempel på moderne, tilgjengelige og responsive skjemaer
+      </p>
+    </header>
+
+    <!-- Progress-indikator -->
+    <ol class="form-progress" aria-label="Skjemafremgang">
+      <li class="progress-step active" aria-current="step">Personlig info</li>
+      <li class="progress-step">Kontaktinfo</li>
+      <li class="progress-step">Preferanser</li>
+      <li class="progress-step">Bekreftelse</li>
+    </ol>
+
+    <!-- Hovedskjema -->
+    <form class="form-container" action="#" method="POST" novalidate>
+      <!-- Personlig informasjon -->
+      <fieldset>
+        <legend>Personlig informasjon</legend>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fornavn" class="form-label required">
+              Fornavn
+            </label>
+            <input type="text" id="fornavn" name="fornavn" class="form-input" 
+                   required aria-required="true" 
+                   aria-describedby="fornavn-hjelp fornavn-feil"
+                   pattern="[A-Za-zæøåÆØÅ\s]{2,}">
+            <span id="fornavn-hjelp" class="help-text">
+              Ditt fulle fornavn
+            </span>
+            <span id="fornavn-feil" class="error-message" role="alert"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="etternavn" class="form-label required">
+              Etternavn
+            </label>
+            <input type="text" id="etternavn" name="etternavn" class="form-input" 
+                   required aria-required="true"
+                   aria-describedby="etternavn-hjelp etternavn-feil"
+                   pattern="[A-Za-zæøåÆØÅ\s]{2,}">
+            <span id="etternavn-hjelp" class="help-text">
+              Ditt fulle etternavn
+            </span>
+            <span id="etternavn-feil" class="error-message" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fodselsdato" class="form-label required">
+            Fødselsdato
+          </label>
+          <input type="date" id="fodselsdato" name="fodselsdato" class="form-input" 
+                 required aria-required="true"
+                 aria-describedby="fodselsdato-hjelp fodselsdato-feil"
+                 max="2006-01-01" min="1900-01-01">
+          <span id="fodselsdato-hjelp" class="help-text">
+            Du må være minst 18 år
+          </span>
+          <span id="fodselsdato-feil" class="error-message" role="alert"></span>
+        </div>
+      </fieldset>
+
+      <!-- Kontaktinformasjon -->
+      <fieldset>
+        <legend>Kontaktinformasjon</legend>
+        
+        <div class="form-group">
+          <label for="epost" class="form-label required">
+            E-postadresse
+          </label>
+          <input type="email" id="epost" name="epost" class="form-input" 
+                 required aria-required="true"
+                 aria-describedby="epost-hjelp epost-feil"
+                 placeholder="navn@eksempel.no"
+                 autocomplete="email">
+          <span id="epost-hjelp" class="help-text">
+            Vi vil aldri dele e-postadressen din med andre
+          </span>
+          <span id="epost-feil" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefon" class="form-label">
+              Telefonnummer <span class="text-muted">(valgfritt)</span>
+            </label>
+            <input type="tel" id="telefon" name="telefon" class="form-input" 
+                   aria-describedby="telefon-hjelp telefon-feil"
+                   pattern="[0-9\s\+]{8,}"
+                   placeholder="+47 123 45 678"
+                   autocomplete="tel">
+            <span id="telefon-hjelp" class="help-text">
+              Inkluder landkode hvis utenlandsk nummer
+            </span>
+            <span id="telefon-feil" class="error-message" role="alert"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="land" class="form-label">
+              Land
+            </label>
+            <select id="land" name="land" class="form-select" 
+                    aria-describedby="land-hjelp"
+                    autocomplete="country">
+              <option value="">Velg et land...</option>
+              <optgroup label="Norden">
+                <option value="no">Norge</option>
+                <option value="se">Sverige</option>
+                <option value="dk">Danmark</option>
+                <option value="fi">Finland</option>
+                <option value="is">Island</option>
+              </optgroup>
+              <optgroup label="Europa">
+                <option value="de">Tyskland</option>
+                <option value="fr">Frankrike</option>
+                <option value="gb">Storbritannia</option>
+              </optgroup>
+            </select>
+            <span id="land-hjelp" class="help-text">
+              Hvilket land bor du i?
+            </span>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Preferanser -->
+      <fieldset>
+        <legend>Preferanser</legend>
+        
+        <div class="form-group">
+          <label for="interesser" class="form-label">
+            Interesser
+          </label>
+          <select id="interesser" name="interesser[]" class="form-select" 
+                  multiple size="4"
+                  aria-describedby="interesser-hjelp">
+            <option value="teknologi">Teknologi</option>
+            <option value="design">Design</option>
+            <option value="musikk">Musikk</option>
+            <option value="sport">Sport</option>
+            <option value="kunst">Kunst</option>
+            <option value="reise">Reise</option>
+          </select>
+          <span id="interesser-hjelp" class="help-text">
+            Hold nede Ctrl (Cmd på Mac) for å velge flere
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="erfaring" class="form-label">
+            Erfaringsnivå (1-10)
+          </label>
+          <input type="range" id="erfaring" name="erfaring" class="form-range" 
+                 min="1" max="10" value="5" step="1"
+                 aria-describedby="erfaring-hjelp erfaring-verdi"
+                 oninput="document.getElementById('erfaring-verdi').textContent = this.value">
+          <span id="erfaring-hjelp" class="help-text">
+            Hvor erfaren er du? <span id="erfaring-verdi">5</span>/10
+          </span>
+        </div>
+
+        <div class="form-group">
+          <p class="form-label">Kommunikasjonspreferanser</p>
+          <div class="form-check">
+            <input type="checkbox" id="epost-oppdateringer" name="kommunikasjon[]" value="epost">
+            <label for="epost-oppdateringer">E-postoppdateringer</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="sms-varsler" name="kommunikasjon[]" value="sms">
+            <label for="sms-varsler">SMS-varsler</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="nyhetsbrev" name="kommunikasjon[]" value="nyhetsbrev" checked>
+            <label for="nyhetsbrev">Nyhetsbrev</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-label">Kontaktfrekvens</p>
+          <div class="form-check">
+            <input type="radio" id="frekvens-ukentlig" name="frekvens" value="ukentlig">
+            <label for="frekvens-ukentlig">Ukentlig</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="frekvens-månedlig" name="frekvens" value="månedlig" checked>
+            <label for="frekvens-månedlig">Månedlig</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="frekvens-kvartalsvis" name="frekvens" value="kvartalsvis">
+            <label for="frekvens-kvartalsvis">Kvartalsvis</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Tilleggsinformasjon -->
+      <fieldset>
+        <legend>Tilleggsinformasjon</legend>
+        
+        <div class="form-group">
+          <label for="bio" class="form-label">
+            Kort biografi
+          </label>
+          <textarea id="bio" name="bio" class="form-textarea" 
+                    rows="4" maxlength="500"
+                    aria-describedby="bio-hjelp bio-teller"
+                    placeholder="Fortell litt om deg selv..."></textarea>
+          <span id="bio-hjelp" class="help-text">
+            Maksimalt <span id="bio-teller">500</span> tegn
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="farge" class="form-label">
+            Favorittfarge
+          </label>
+          <input type="color" id="farge" name="farge" class="form-input" 
+                 value="#0066cc"
+                 aria-describedby="farge-hjelp">
+          <span id="farge-hjelp" class="help-text">
+            Velg din favorittfarge
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="cv" class="form-label">
+            Last opp CV <span class="text-muted">(valgfritt)</span>
+          </label>
+          <div class="file-upload">
+            <input type="file" id="cv" name="cv" 
+                   accept=".pdf,.doc,.docx" 
+                   aria-describedby="cv-hjelp">
+            <label for="cv" class="file-upload-label">
+              <span>📎 Klikk her eller dra og slipp filer</span>
+            </label>
+          </div>
+          <span id="cv-hjelp" class="help-text">
+            Aksepterte formater: PDF, DOC, DOCX (maks 5MB)
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="nettsted" class="form-label">
+            Personlig nettsted <span class="text-muted">(valgfritt)</span>
+          </label>
+          <input type="url" id="nettsted" name="nettsted" class="form-input" 
+                 placeholder="https://www.mittnettsted.no"
+                 aria-describedby="nettsted-hjelp"
+                 autocomplete="url">
+          <span id="nettsted-hjelp" class="help-text">
+            Din personlige eller profesjonelle nettside
+          </span>
+        </div>
+      </fieldset>
+
+      <!-- Vilkår og betingelser -->
+      <fieldset>
+        <legend>Vilkår og betingelser</legend>
+        
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" id="vilkar" name="vilkar" required 
+                   aria-describedby="vilkar-hjelp vilkar-feil">
+            <label for="vilkar">
+              Jeg godtar <a href="#" onclick="alert('Vilkår og betingelser ville vises her'); return false;">vilkår og betingelser</a>
+            </label>
+          </div>
+          <span id="vilkar-hjelp" class="help-text">
+            Du må godta vilkårene for å fortsette
+          </span>
+          <span id="vilkar-feil" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="personvern" name="personvern" required 
+                 aria-describedby="personvern-hjelp">
+          <label for="personvern">
+            Jeg samtykker til <a href="#" onclick="alert('Personvernerklæring ville vises her'); return false;">behandling av personopplysninger</a>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Knapper -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">
+          Send inn skjema
+        </button>
+        <button type="reset" class="btn btn-secondary">
+          Tilbakestill
+        </button>
+      </div>
+    </form>
+
+    <!-- Ekstra informasjon -->
+    <section class="form-container">
+      <h2>🎯 Dette demonstrerer</h2>
+      <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+        <div>
+          <h3>✅ Tilgjengelighet</h3>
+          <ul>
+            <li>Riktig label-tilknytning</li>
+            <li>ARIA-attributter</li>
+            <li>Fokus-stiler</li>
+            <li>Høykontrast støtte</li>
+          </ul>
+        </div>
+        <div>
+          <h3>📱 Responsivt design</h3>
+          <ul>
+            <li>Mobile-first tilnærming</li>
+            <li>Fluid typografi</li>
+            <li>Touch-vennlige mål</li>
+            <li>Flexible layout</li>
+          </ul>
+        </div>
+        <div>
+          <h3>🎨 Moderne styling</h3>
+          <ul>
+            <li>CSS-variabler</li>
+            <li>Custom form elements</li>
+            <li>Transitions og hover-effekter</li>
+            <li>Tilstandsstiler</li>
+          </ul>
+        </div>
+        <div>
+          <h3>🔧 Funksjonalitet</h3>
+          <ul>
+            <li>HTML5-validering</li>
+            <li>JavaScript-forbedringer</li>
+            <li>File upload styling</li>
+            <li>Progress indication</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Tema-switcher funksjonalitet
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.classList.toggle('dark-mode');
+      
+      // Lagre preferanse
+      const isDark = html.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      
+      // Oppdater knappetekst
+      const button = event.target;
+      button.textContent = isDark ? '☀️ Lys' : '🌓 Mørk';
+    }
+
+    // Vis informasjon om gjeldende innstillinger
+    function showInfo() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark-mode');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const highContrast = window.matchMedia('(prefers-contrast: high)').matches;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      alert(`Gjeldende innstillinger:
+        
+        🎨 Tema: ${isDark ? 'Mørk' : 'Lys'} modus
+        🖥️  System: ${prefersDark ? 'Foretrekker mørk' : 'Foretrekker lys'}
+        🔍 Kontrast: ${highContrast ? 'Høy' : 'Standard'}
+        🎯 Bevegelse: ${reducedMotion ? 'Redusert' : 'Standard'}
+        
+        Dette skjemaet tilpasser seg automatisk etter dine systeminnstillinger!`);
+    }
+
+    // Initialiser tema
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    }
+
+    // Tekstteller for textarea
+    function initTextCounters() {
+      const textareas = document.querySelectorAll('.form-textarea[maxlength]');
+      
+      textareas.forEach(textarea => {
+        const maxLength = textarea.getAttribute('maxlength');
+        const counterId = textarea.id + '-teller';
+        const counter = document.getElementById(counterId);
+        
+        if (counter) {
+          // Oppdater teller ved lasting
+          updateTextCounter(textarea, counter, maxLength);
+          
+          // Lytt til input-events
+          textarea.addEventListener('input', () => {
+            updateTextCounter(textarea, counter, maxLength);
+          });
+        }
+      });
+    }
+
+    function updateTextCounter(textarea, counter, maxLength) {
+      const currentLength = textarea.value.length;
+      const remaining = maxLength - currentLength;
+      counter.textContent = remaining;
+      
+      // Advar ved få tegn igjen
+      if (remaining < 50) {
+        counter.style.color = 'var(--color-warning)';
+      } else {
+        counter.style.color = 'var(--text-color-muted)';
+      }
+      
+      // Advar når grensen nås
+      if (remaining <= 0) {
+        counter.style.color = 'var(--color-danger)';
+      }
+    }
+
+    // File upload feedback
+    function initFileUpload() {
+      const fileInputs = document.querySelectorAll('input[type="file"]');
+      
+      fileInputs.forEach(input => {
+        input.addEventListener('change', function() {
+          const fileName = this.files[0]?.name || 'Ingen fil valgt';
+          const label = this.nextElementSibling;
+          const originalText = label.querySelector('span')?.textContent || 'Velg fil';
+          
+          if (this.files.length > 0) {
+            label.querySelector('span').textContent = `📎 ${fileName}`;
+            label.style.borderColor = 'var(--color-success)';
+            label.style.backgroundColor = 'var(--bg-color-secondary)';
+          } else {
+            label.querySelector('span').textContent = originalText;
+            label.style.borderColor = 'var(--border-color)';
+            label.style.backgroundColor = 'var(--bg-color)';
+          }
+        });
+      });
+    }
+
+    // Skjemavalidering
+    function initFormValidation() {
+      const form = document.querySelector('form');
+      
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        if (validateForm()) {
+          // Her ville du normalt sende skjemaet
+          alert('Skjemaet er gyldig og klart til å sendes!\n\nI en ekte applikasjon ville dataene nå blitt sendt til serveren.');
+          console.log('Form data would be submitted here');
+        }
+      });
+      
+      // Validering ved blur (når bruker forlater feltet)
+      const inputs = form.querySelectorAll('.form-input, .form-textarea, .form-select');
+      inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+          validateField(this);
+        });
+        
+        // Fjern feilmelding når bruker retter opp
+        input.addEventListener('input', function() {
+          if (this.classList.contains('invalid')) {
+            validateField(this);
+          }
+        });
+      });
+    }
+
+    function validateForm() {
+      let isValid = true;
+      const requiredFields = document.querySelectorAll('[required]');
+      
+      requiredFields.forEach(field => {
+        if (!validateField(field)) {
+          isValid = false;
+        }
+      });
+      
+      return isValid;
+    }
+
+    function validateField(field) {
+      const formGroup = field.closest('.form-group');
+      const errorElement = document.getElementById(field.id + '-feil');
+      let isValid = true;
+      let errorMessage = '';
+      
+      // Sjekk om feltet er tomt
+      if (field.hasAttribute('required') && !field.value.trim()) {
+        isValid = false;
+        errorMessage = 'Dette feltet er påkrevd.';
+      }
+      // Sjekk pattern-validering
+      else if (field.hasAttribute('pattern') && field.value && !field.validity.valid) {
+        isValid = false;
+        errorMessage = getPatternErrorMessage(field);
+      }
+      // Sjekk type-validering (email, url, etc.)
+      else if (field.type === 'email' && field.value && !field.validity.valid) {
+        isValid = false;
+        errorMessage = 'Vennligst oppgi en gyldig e-postadresse.';
+      }
+      else if (field.type === 'url' && field.value && !field.validity.valid) {
+        isValid = false;
+        errorMessage = 'Vennligst oppgi en gyldig nettadresse.';
+      }
+      
+      // Vis eller skjul feilmelding
+      if (errorElement) {
+        if (!isValid && field.value) {
+          errorElement.textContent = errorMessage;
+          errorElement.classList.add('show');
+          formGroup.classList.add('has-error');
+          field.setAttribute('aria-invalid', 'true');
+        } else if (isValid) {
+          errorElement.classList.remove('show');
+          formGroup.classList.remove('has-error');
+          field.setAttribute('aria-invalid', 'false');
+        }
+      }
+      
+      return isValid;
+    }
+
+    function getPatternErrorMessage(field) {
+      const pattern = field.getAttribute('pattern');
+      switch(pattern) {
+        case '[A-Za-zæøåÆØÅ\\s]{2,}':
+          return 'Bare bokstaver tillatt, minimum 2 tegn.';
+        case '[0-9\\s\\+]{8,}':
+          return 'Telefonnummer må inneholde minst 8 siffer.';
+        default:
+          return 'Vennligst følg det angitte formatet.';
+      }
+    }
+
+    // Progress tracking
+    function updateProgress() {
+      const steps = document.querySelectorAll('.progress-step');
+      const fieldsets = document.querySelectorAll('fieldset');
+      let completedSteps = 0;
+      
+      fieldsets.forEach((fieldset, index) => {
+        const inputs = fieldset.querySelectorAll('.form-input, .form-textarea, .form-select');
+        const requiredInputs = fieldset.querySelectorAll('[required]');
+        let isCompleted = true;
+        
+        requiredInputs.forEach(input => {
+          if (!input.value.trim()) {
+            isCompleted = false;
+          }
+        });
+        
+        if (isCompleted && requiredInputs.length > 0) {
+          steps[index].classList.add('completed');
+          completedSteps++;
+        }
+      });
+      
+      // Oppdater aktivt steg
+      steps.forEach((step, index) => {
+        step.classList.remove('active');
+        if (index === completedSteps) {
+          step.classList.add('active');
+        }
+      });
+    }
+
+    // Initialisering
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      initTextCounters();
+      initFileUpload();
+      initFormValidation();
+      
+      // Oppdater fremgang ved lasting
+      updateProgress();
+    });

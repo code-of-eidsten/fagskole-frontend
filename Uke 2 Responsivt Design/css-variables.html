@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reis til Mars (med stil)</title>
+    <style>
+        :root {
+            --mars-bg: #ffefd5;
+            --mars-primary: #ff4500;
+            --mars-text: #333;
+            --mars-text-light: #fff;
+            --mars-text-muted: #666;
+            --mars-border: #ccc;
+            --font-size-h1: clamp(2rem, 5vw, 4rem);
+            --font-size-h2: clamp(1.5rem, 4vw, 3rem);
+            --font-size-h3: clamp(1.25rem, 3vw, 2rem);
+            --font-size-base: clamp(1rem, 2.5vw, 1.5rem);
+            --font-size-body: 16px;
+        }
+
+        body {
+            background-color: var(--mars-bg);
+            color: var(--mars-text);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--mars-primary);
+            color: var(--mars-text-light);
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: var(--font-size-h1);
+            margin: 0;
+        }
+
+        h2 {
+            font-size: var(--font-size-h2);
+            color: var(--mars-text);
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .card {
+            background-color: var(--mars-text-light);
+            border: 2px solid var(--mars-border);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: var(--font-size-h3);
+            color: var(--mars-primary);
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: var(--font-size-body);
+            color: var(--mars-text-muted);
+        }
+
+        .button {
+            background-color: var(--mars-primary);
+            color: var(--mars-text-light);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: var(--font-size-body);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--mars-primary);
+        }
+
+        .layout {
+            display: flex;
+            gap: var(--spacing, 20px);
+        }
+
+        .sidebar {
+            width: calc(300px - 2rem);
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: calc(100% - 300px);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Reis til Mars (med stil)</h1>
+    </header>
+    <div class="layout">
+        <aside class="sidebar">...</aside>
+        <main class="main-content">...</main>
+    </div>
+    <div class="section">
+        <h2>Velg din pakkereise</h2>
+
+        <div class="card">
+            <h3 class="card-title">Luksuspakke</h3>
+            <p class="card-text">Reis til Mars i en femstjerners romkapsel med egen jacuzzi og gourmetmat.</p>
+            <button class="button">Bestill nå</button>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Eventyrpakke</h3>
+            <p class="card-text">Opplev Mars på nært hold med guidede turer til Olympus Mons og Valles Marineris.</p>
+            <button class="button">Bestill nå</button>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Familiepakke</h3>
+            <p class="card-text">Ta med hele familien på en spennende reise til Mars, komplett med aktiviteter for barn.
+            </p>
+            <button class="button">Bestill nå</button>
+        </div>
+    </div>
+</body>
+
+</html>
