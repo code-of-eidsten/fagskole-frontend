@@ -9,6 +9,8 @@
   <h1>Kontaktskjema</h1>
   <!-- Ditt skjema her -->
    <form action="#" method="POST" novalidate>
+     <fieldset>
+        <legend>Personlig informasjon</legend>
         <div>
              <label for="fornavn">
               Fornavn
@@ -61,7 +63,9 @@
               Inkluder landkode hvis utenlandsk nummer
             </span>
         </div>
-
+     </fieldset>
+     <fieldset>
+        <legend>Din melding</legend>
          <div>
           <label for="msg">
             Kort melding
@@ -74,12 +78,18 @@
             Maksimalt <span id="msg-teller">500</span> tegn
           </span>
         </div>
-
+        </fieldset>
+<fieldset>
+  <legend>Kommunikasjon</legend>
+          <div>
+            <input type="checkbox" id="sms" name="kommunikasjon[]" value="sms">
+            <label for="sms">SMS</label>
+          </div>
         <div>
             <input type="checkbox" id="nyhetsbrev" name="kommunikasjon[]" value="nyhetsbrev" checked>
             <label for="nyhetsbrev">Nyhetsbrev</label>
           </div>
-
+</fieldset>
    </form>
 </body>
 </html>
